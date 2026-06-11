@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="bpaas-design-system" content="midnight-glass">
+    <meta name="bpaas-design-theme" content="kr-midnight-glass">
+    <meta name="description" content="공항 클럽 룩북 블로그 - 나만의 여행 스타일을 완성하는 꿀팁 대방출. 클럽에서도 공항에서도 빛나는 룩의 비밀을 알려드립니다.">
+    <meta name="keywords" content="공항 클럽, 공항 클럽 룩북, 여행 스타일, 클럽 패션, 공항 패션, 블로그, 스타일링 팁">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://t3b07-gh-club-look.vercel.app/blog">
+    <meta property="og:title" content="공항 클럽 룩북 블로그 | 진짜 여행 고수들의 스타일 비밀">
+    <meta property="og:description" content="공항과 클럽, 두 마리 토끼를 잡는 스타일링 꿀팁. 내 경험담과 함께 진짜 유용한 정보만 쏙쏙 알려줄게.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://t3b07-gh-club-look.vercel.app/blog">
+    <meta property="og:image" content="https://t3b07-gh-club-look.vercel.app/images/og-blog.jpg">
+    <meta property="og:locale" content="ko_KR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="공항 클럽 룩북 블로그">
+    <meta name="twitter:description" content="여행 가방 속에 꼭 넣어야 할 아이템부터 클럽에서 빛나는 룩까지, 진짜 팁만 모아봤어.">
+    <title>공항 클럽 룩북 블로그 | 여행 스타일링 꿀팁 대방출</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0a0f1e 0%, #1a1f2e 50%, #0d1225 100%);
+            color: #e8eaf0;
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background: rgba(10, 15, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        nav a {
+            color: #a0a5b5;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 3px;
+        }
+        nav a:hover {
+            color: #fff;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #a78bfa, #7c3aed);
+            transition: width 0.3s;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: #fff;
+            margin: 4px 0;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 15, 30, 0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .nav-mobile.active {
+            display: flex;
+            opacity: 1;
+        }
+        .nav-mobile a {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .page-header {
+            padding: 140px 0 50px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 30%, #a78bfa 70%, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        .page-header p {
+            color: #8890a5;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .blog-post {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            backdrop-filter: blur(10px);
+        }
+        .blog-post .meta {
+            display: flex;
+            gap: 20px;
+            color: #8890a5;
+            font-size: 14px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .blog-post .meta .tag {
+            background: rgba(167, 139, 250, 0.15);
+            color: #a78bfa;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        .blog-post h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+        .blog-post h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #c8cce0;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+        .blog-post p {
+            color: #b0b5c8;
+            font-size: 16px;
+            margin-bottom: 18px;
+        }
+        .blog-post strong {
+            color: #e0e4f0;
+        }
+        .blog-post .highlight-box {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.08), rgba(124, 58, 237, 0.08));
+            border-left: 4px solid #a78bfa;
+            padding: 25px 30px;
+            border-radius: 0 12px 12px 0;
+            margin: 30px 0;
+        }
+        .blog-post .highlight-box p {
+            margin-bottom: 5px;
+            color: #d0d4e8;
+        }
+        .blog-post ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .blog-post ul li {
+            color: #b0b5c8;
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+        }
+        .blog-post ul li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #a78bfa;
+            font-size: 14px;
+        }
+        .blog-post .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(124, 58, 237, 0.1));
+            border-radius: 16px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8890a5;
+            font-size: 16px;
+            border: 1px dashed rgba(167, 139, 250, 0.3);
+        }
+        .blog-post .cta-section {
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 40px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.05), rgba(124, 58, 237, 0.05));
+            border-radius: 16px;
+            border: 1px solid rgba(167, 139, 250, 0.1);
+        }
+        .blog-post .cta-section p {
+            font-size: 20px;
+            color: #d0d4e8;
+            margin-bottom: 10px;
+        }
+        .blog-post .cta-section .tel-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            color: #fff;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .blog-post .cta-section .tel-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+            }
+            .page-header {
+                padding: 120px 0 40px;
+            }
+            .page-header h1 {
+                font-size: 32px;
+            }
+            .page-header p {
+                font-size: 16px;
+            }
+            .blog-post {
+                padding: 25px;
+                margin-bottom: 40px;
+            }
+            .blog-post h2 {
+                font-size: 24px;
+            }
+            .blog-post h3 {
+                font-size: 18px;
+            }
+            .blog-post .image-placeholder {
+                height: 250px;
+            }
+            .blog-post .cta-section {
+                padding: 30px 15px;
+            }
+            .blog-post .cta-section .tel-link {
+                font-size: 16px;
+                padding: 12px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">공항클럽<span>룩북</span></a>
+            <nav>
+                <ul>
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/lookbook">룩북</a></li>
+                    <li><a href="/about">소개</a></li>
+                    <li><a href="/blog">블로그</a></li>
+                    <li><a href="/contact">문의</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="nav-mobile" id="navMobile">
+            <a href="/" onclick="toggleMenu()">홈</a>
+            <a href="/lookbook" onclick="toggleMenu()">룩북</a>
+            <a href="/about" onclick="toggleMenu()">소개</a>
+            <a href="/blog" onclick="toggleMenu()">블로그</a>
+            <a href="/contact" onclick="toggleMenu()">문의</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>블로그</h1>
+            <p>진짜 공항 클럽 고수들이 알려주는 스타일링 꿀팁과 썰. 내 경험담도 같이 풀어볼게.</p>
+        </div>
+
+        <article class="blog-post">
+            <div class="meta">
+                <span>2025.02.15</span>
+                <span class="tag">스타일링 꿀팁</span>
+                <span class="tag">여행 에디트</span>
+            </div>
+            <h2>공항에서 클럽까지, 내가 진짜 입고 다니는 '원 아이템' 3가지</h2>
+
+            <div class="image-placeholder">🛫 공항 클럽 룩북 에디토리얼 이미지</div>
+
+            <p>야, 형. 요즘 비행기 타고 클럽 가는 게 일상이 된 지 좀 됐거든? 근데 매번 "공항에서 편하게 입자" vs "클럽에서 간지 나게 입자" 이 고민, 진짜 개빡치지 않아? 나도 처음엔 여행 가방에 옷 두 벌씩 챙겼었어. 근데 어느 순간 깨달았지. "아, 진짜 센스 있는 사람들은 하나로 두 마리 토끼를 잡는구나."</p>
+
+            <p>오늘은 내가 직접 발로 뛰고, 지갑도 열고, 공항 라운지부터 클럽 VIP석까지 실전 테스트한 원 아이템 3가지를 공개할게. 이거만 알면 너도 더 이상 가방 무겁게 싸지 않아도 돼. 믿어봐, 내가 형이니까.</p>
+
+            <h3>1️⃣ 블레이저 — 이거 하나면 공항에서도, 클럽에서도 간지</h3>
+            <p>처음엔 나도 "블레이저? 너무 포멀한 거 아냐?" 이랬거든. 근데 형, 블레이저는 그냥 '정장 재킷'이 아니야. <strong>소재와 핏</strong>이 핵심이야. 나는 린넨이나 울 혼방으로 된, 살짝 오버핏 느낌 나는 걸로 골라. 공항에서 입으면 "아, 저 사람 비즈니스석 타나?" 싶은 느낌 주고, 클럽 가서는 그냥 벗으면 끝. 안에 흰 티 하나만 입어도 완전 럭셔리 캐주얼 완성됨.</p>
+
+            <p>내 팁? <strong>블랙, 차콜, 혹은 딥 네이비</strong> 같은 무채색 계열로 가. 포인트는 어깨 라인이 너무 딱 맞지 않고 여유 있는 거. 그래야 공항에서 오래 앉아 있어도 편하고, 클럽에서 춤 출 때도 움직임이 자연스러워.</p>
+
+            <div class="highlight-box">
+                <p><strong>✈️ 형의 꿀팁:</strong> 블레이저 안주머니에 여권하고 카드지갑 넣어. 그러면 클러치백도 필요 없어. 손이 자유로우면 그게 제일 간지야.</p>
+            </div>
+
+            <h3>2️⃣ 와이드 슬랙스 — 편안함의 끝판왕, 근데 왜 이렇게 섹시해?</h3>
+            <p>솔직히 말할게. 나 청바지 거의 안 입어. 비행기 안에서 10시간 이상 앉아 있어야 하는데, 청바지는 진짜 지옥이야. 그래서
+</body>
+</html>
